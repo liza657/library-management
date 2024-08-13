@@ -1,5 +1,6 @@
 package org.example.techtask.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -19,6 +20,10 @@ public class Member {
 
     @Id
     private UUID id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "membershipDate")
     private LocalDateTime membershipDate;
 }
