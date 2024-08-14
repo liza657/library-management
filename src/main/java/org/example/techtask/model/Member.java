@@ -1,14 +1,14 @@
 package org.example.techtask.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -19,6 +19,7 @@ import java.util.UUID;
 public class Member {
 
     @Id
+    @UuidGenerator
     private UUID id;
 
     @Column(name = "name")
@@ -26,4 +27,12 @@ public class Member {
 
     @Column(name = "membershipDate")
     private LocalDateTime membershipDate;
+
+    @ManyToMany
+    @JoinTable(
+            name = "borrowed",
+            joinColumns = @JoinColumn(name = "member_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id"))
+    @JsonBackReference
+    List<Book> borrowedBooks;
 }
