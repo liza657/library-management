@@ -3,3 +3,7 @@ spring:
     username: postgres
     password: 35440
     url: jdbc:postgresql://localhost:5432/postgres
+
+library:
+  borrow:
+    limit: 10
