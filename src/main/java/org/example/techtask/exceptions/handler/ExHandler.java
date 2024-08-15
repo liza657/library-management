@@ -31,11 +31,6 @@ public class ExHandler {
         return buildResponseEntity(HttpStatus.NOT_FOUND, exception.getMessage());
     }
 
-    @ExceptionHandler(EntityIsAlreadyExists.class)
-    protected ResponseEntity<Object> handleEntityIsAlreadyExists(
-            EntityIsAlreadyExists exception) {
-        return buildResponseEntity(HttpStatus.BAD_REQUEST, exception.getMessage());
-    }
 
     @ExceptionHandler(EntityIsNotAvailableException.class)
     protected ResponseEntity<Object> handleEntityIsNotAvailable(
