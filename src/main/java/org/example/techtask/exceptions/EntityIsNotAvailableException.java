@@ -7,8 +7,5 @@ public class EntityIsNotAvailableException extends RuntimeException {
         super(message.isEmpty() ? ENTITY_IS_NOT_AVAILABLE : message);
     }
 
-    public EntityIsNotAvailableException() {
-        super(ENTITY_IS_NOT_AVAILABLE);
-    }
 
 }

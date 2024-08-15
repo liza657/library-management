@@ -7,7 +7,4 @@ public class LimitExceededException extends RuntimeException {
         super(message.isEmpty() ? LIMIT_EXCEED : message);
     }
 
-    public LimitExceededException() {
-        super(LIMIT_EXCEED);
-    }
 }

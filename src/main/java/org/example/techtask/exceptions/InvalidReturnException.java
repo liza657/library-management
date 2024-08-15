@@ -7,7 +7,4 @@ public class InvalidReturnException extends RuntimeException {
         super(message.isEmpty() ? INVALID_RETURN : message);
     }
 
-    public InvalidReturnException() {
-        super(INVALID_RETURN);
-    }
 }

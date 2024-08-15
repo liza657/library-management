@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.techtask.dto.book.request.CreateBookRequest;
 import org.example.techtask.dto.book.request.UpdateBookRequest;
-import org.example.techtask.dto.book.response.CreateBookResponse;
-import org.example.techtask.dto.book.response.GetBookResponse;
-import org.example.techtask.dto.book.response.UpdateBookResponse;
-import org.example.techtask.dto.member.response.DistinctBorrowedBookResponse;
+import org.example.techtask.dto.book.response.*;
 import org.example.techtask.exceptions.*;
 import org.example.techtask.mapper.BookMapper;
 import org.example.techtask.model.Book;
@@ -130,19 +127,15 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Page<String> getAllDistinctBorrowedBooks(Pageable pageable) {
-        return bookRepository.findDistinctBorrowedBookNames(pageable);
+    public Page<DistinctBorrowedBooksResponse> getAllDistinctBorrowedBooks(Pageable pageable) {
+        Page<String> titles = bookRepository.findDistinctBorrowedBookNames(pageable);
+        return titles.map(DistinctBorrowedBooksResponse::new);
     }
 
-//    @Override
-//    public Page<DistinctBorrowedBookResponse> getAllDistinctBorrowedBooksAndAmount(Pageable pageable) {
-//        Page<DistinctBorrowedBookResponse> books = bookRepository.findDistinctBorrowedBookNamesAndAmount(pageable);
-//        return books.map(bookMapper::borrowedBookToView);
-//    }
     @Override
-public List<DistinctBorrowedBookResponse> getAllDistinctBorrowedBooksAndAmount() {
-    return bookRepository.findDistinctBorrowedBookNamesAndAmount();
-}
+    public Page<DistinctBorrowedBookAndAmountResponse> getAllDistinctBorrowedBooksAndAmount(Pageable pageable) {
+        return bookRepository.findDistinctBorrowedBookNamesAndAmount(pageable);
+    }
 
     private Book findBookById(UUID id) {
         return bookRepository.findById(id).orElseThrow(() -> new EntityNotExistsException(String.format(BOOK_NOT_FOUND)));

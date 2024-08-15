@@ -4,10 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.techtask.dto.book.request.CreateBookRequest;
 import org.example.techtask.dto.book.request.UpdateBookRequest;
-import org.example.techtask.dto.book.response.CreateBookResponse;
-import org.example.techtask.dto.book.response.GetBookResponse;
-import org.example.techtask.dto.book.response.UpdateBookResponse;
-import org.example.techtask.dto.member.response.DistinctBorrowedBookResponse;
+import org.example.techtask.dto.book.response.*;
 import org.example.techtask.service.BookService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -38,7 +34,7 @@ public class BookController {
     }
 
     @PutMapping("{bookId}")
-    public ResponseEntity<UpdateBookResponse> updateBook(@PathVariable("bookId") UUID bookId,@Valid  @RequestBody UpdateBookRequest request) {
+    public ResponseEntity<UpdateBookResponse> updateBook(@PathVariable("bookId") UUID bookId, @Valid @RequestBody UpdateBookRequest request) {
         return ResponseEntity.status(HttpStatus.OK).body(bookService.updateBook(bookId, request));
     }
 
@@ -69,23 +65,19 @@ public class BookController {
     }
 
     @GetMapping("DistinctBorrowedBooks")
-    public ResponseEntity<Page<String>> getAllDistinctBorrowedBooks(
+    public ResponseEntity<Page<DistinctBorrowedBooksResponse>> getAllDistinctBorrowedBooks(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         Pageable pageable = PageRequest.of(page, size);
         return ResponseEntity.status(HttpStatus.OK).body(bookService.getAllDistinctBorrowedBooks(pageable));
     }
 
-//    @GetMapping("DistinctBorrowedBookNamesAndAmount")
-//    public ResponseEntity<Page<GetBookResponse>> getAllDistinctBorrowedBooksAndAmount(
-//            @RequestParam(defaultValue = "0") int page,
-//            @RequestParam(defaultValue = "10") int size) {
-//        Pageable pageable = PageRequest.of(page, size);
-//        return ResponseEntity.status(HttpStatus.OK).body(bookService.getAllDistinctBorrowedBooksAndAmount(pageable));
-//    }
-@GetMapping("DistinctBorrowedBookNamesAndAmount")
-public ResponseEntity<List<DistinctBorrowedBookResponse>> getAllDistinctBorrowedBooksAndAmount(
-       ) {
-    return ResponseEntity.status(HttpStatus.OK).body(bookService.getAllDistinctBorrowedBooksAndAmount());
-}
+
+    @GetMapping("DistinctBorrowedBookNamesAndAmount")
+    public ResponseEntity<Page<DistinctBorrowedBookAndAmountResponse>> getAllDistinctBorrowedBooksAndAmount(@RequestParam(defaultValue = "0") int page,
+                                                                                                            @RequestParam(defaultValue = "10") int size
+    ) {
+        Pageable pageable = PageRequest.of(page, size);
+        return ResponseEntity.status(HttpStatus.OK).body(bookService.getAllDistinctBorrowedBooksAndAmount(pageable));
+    }
 }

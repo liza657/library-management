@@ -7,8 +7,5 @@ public class BookBorrowedException extends RuntimeException{
         super(message.isEmpty() ? BOOK_BORROWED : message);
     }
 
-    public BookBorrowedException() {
-        super(BOOK_BORROWED);
-    }
 
 }

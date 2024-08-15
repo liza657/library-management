@@ -2,14 +2,10 @@ package org.example.techtask.service;
 
 import org.example.techtask.dto.book.request.CreateBookRequest;
 import org.example.techtask.dto.book.request.UpdateBookRequest;
-import org.example.techtask.dto.book.response.CreateBookResponse;
-import org.example.techtask.dto.book.response.GetBookResponse;
-import org.example.techtask.dto.book.response.UpdateBookResponse;
-import org.example.techtask.dto.member.response.DistinctBorrowedBookResponse;
+import org.example.techtask.dto.book.response.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.util.UUID;
 
 public interface BookService {
@@ -20,10 +16,10 @@ public interface BookService {
 
     Page<GetBookResponse> getBooksByMember(String name, Integer pageNumber);
 
-    Page<String> getAllDistinctBorrowedBooks(Pageable pageable);
+    Page<DistinctBorrowedBooksResponse> getAllDistinctBorrowedBooks(Pageable pageable);
 
-//    Page<DistinctBorrowedBookResponse> getAllDistinctBorrowedBooksAndAmount(Pageable pageable);
-    List<DistinctBorrowedBookResponse> getAllDistinctBorrowedBooksAndAmount();
+    Page<DistinctBorrowedBookAndAmountResponse> getAllDistinctBorrowedBooksAndAmount(Pageable pageable);
+
     UpdateBookResponse updateBook(UUID bookId, UpdateBookRequest request);
 
     void borrowBook(UUID bookId, UUID memberId);

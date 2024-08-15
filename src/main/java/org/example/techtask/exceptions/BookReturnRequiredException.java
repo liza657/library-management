@@ -7,8 +7,5 @@ public class BookReturnRequiredException extends RuntimeException{
         super(message.isEmpty() ? BOOK_RETURN_REQUIRED : message);
     }
 
-    public BookReturnRequiredException() {
-        super(BOOK_RETURN_REQUIRED);
-    }
 
 }

@@ -7,8 +7,4 @@ public class EntityNotExistsException extends RuntimeException {
         super(message.isEmpty() ? ENTITY_NOT_EXISTS : message);
     }
 
-    public EntityNotExistsException() {
-        super(ENTITY_NOT_EXISTS);
-    }
-
 }
