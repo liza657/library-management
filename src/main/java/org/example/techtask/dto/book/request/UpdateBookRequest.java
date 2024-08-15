@@ -1,7 +1,10 @@
 package org.example.techtask.dto.book.request;
 
-public record UpdateBookRequest(String title,
+import org.example.techtask.validation.annotation.ValidBookAuthorName;
+import org.example.techtask.validation.annotation.ValidBookTitle;
 
-                                String author) {
+public record UpdateBookRequest(@ValidBookTitle String title,
+
+                                @ValidBookAuthorName String author) {
 
 }

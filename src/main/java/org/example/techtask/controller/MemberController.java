@@ -1,5 +1,6 @@
 package org.example.techtask.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.techtask.dto.member.request.CreateMemberRequest;
 import org.example.techtask.dto.member.request.UpdateMemberRequest;
@@ -20,7 +21,7 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping()
-    public ResponseEntity<CreateMemberResponse> createMember(@RequestBody CreateMemberRequest request) {
+    public ResponseEntity<CreateMemberResponse> createMember(@Valid @RequestBody CreateMemberRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 memberService.createMember(request)
         );
@@ -32,12 +33,12 @@ public class MemberController {
     }
 
     @PutMapping("{memberId}")
-    public ResponseEntity<UpdateMemberResponse> updateBook(@PathVariable("memberId") UUID memberId, @RequestBody UpdateMemberRequest request) {
+    public ResponseEntity<UpdateMemberResponse> updateMember(@PathVariable("memberId") UUID memberId, @Valid @RequestBody UpdateMemberRequest request) {
         return ResponseEntity.status(HttpStatus.OK).body(memberService.updateMember(memberId, request));
     }
 
     @DeleteMapping("{memberId}")
-    public void deleteBook(@PathVariable("memberId") UUID memberId) {
+    public void deleteMember(@PathVariable("memberId") UUID memberId) {
         memberService.deleteMember(memberId);
     }
 

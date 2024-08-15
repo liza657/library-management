@@ -1,4 +1,6 @@
 package org.example.techtask.dto.member.request;
 
-public record UpdateMemberRequest(String name) {
+import org.example.techtask.validation.annotation.ValidMemberName;
+
+public record UpdateMemberRequest(@ValidMemberName String name) {
 }

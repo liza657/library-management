@@ -2,9 +2,11 @@ package org.example.techtask.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.techtask.validation.annotation.ValidMemberName;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;

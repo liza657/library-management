@@ -71,6 +71,7 @@ public class BookServiceImpl implements BookService {
     public UpdateBookResponse updateBook(UUID bookId, UpdateBookRequest request) {
         Book book = findBookById(bookId);
         book.setTitle(request.title());
+        book.setAuthor(request.author());
         bookRepository.save(book);
         return bookMapper.updateBookToView(book);
     }

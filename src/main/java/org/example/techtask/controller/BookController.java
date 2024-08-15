@@ -1,5 +1,6 @@
 package org.example.techtask.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.techtask.dto.book.request.CreateBookRequest;
 import org.example.techtask.dto.book.request.UpdateBookRequest;
@@ -25,7 +26,7 @@ public class BookController {
     private final BookService bookService;
 
     @PostMapping()
-    public ResponseEntity<CreateBookResponse> createBook(@RequestBody CreateBookRequest request) {
+    public ResponseEntity<CreateBookResponse> createBook(@Valid @RequestBody CreateBookRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 bookService.createBook(request)
         );
@@ -37,7 +38,7 @@ public class BookController {
     }
 
     @PutMapping("{bookId}")
-    public ResponseEntity<UpdateBookResponse> updateBook(@PathVariable("bookId") UUID bookId, @RequestBody UpdateBookRequest request) {
+    public ResponseEntity<UpdateBookResponse> updateBook(@PathVariable("bookId") UUID bookId,@Valid  @RequestBody UpdateBookRequest request) {
         return ResponseEntity.status(HttpStatus.OK).body(bookService.updateBook(bookId, request));
     }
 

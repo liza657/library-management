@@ -1,6 +1,9 @@
 package org.example.techtask.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +26,7 @@ public class Book {
     private String title;
 
     @Column(name = "author")
+    @NotBlank(message = "Author is required")
     private String author;
 
     @Column(name = "amount")
